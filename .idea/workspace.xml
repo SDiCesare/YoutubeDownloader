@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="D:/Fiverr/3DSkinMod" value="PREVIEW" />
+        <entry key="D:/Fiverr/AmbulanceMod" value="PREVIEW" />
+        <entry key="D:/Fiverr/AmbulanceMod-1.16.3" value="PREVIEW" />
+        <entry key="D:/Fiverr/EmpoweredZombieMod" value="PREVIEW" />
+        <entry key="D:/Fiverr/MrCrayfishVehicleMod-1.16.X" value="PREVIEW" />
+        <entry key="D:/Fiverr/SevenBedMod" value="PREVIEW" />
+        <entry key="D:/Fiverr/TenChestMod" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/ALotOfThings" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/ALotOfThingsMod" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/Fiverr Work/Elemental Power Mod" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/Fiverr Works" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/Fiverr Works/ElementMod" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/Fiverr Works/Elemental Power Mod" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/Fiverr Works/ElementalPowerMod" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/MyRPG" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/RPG Class mod" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/SkyLandersArmorMod" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/Test/Test1.12.2" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/Test1.14.4" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/Test1.15.2" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/TreeOreMod" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/Minecraft/mods/Vanilla Machine Mod" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Modding/MrCrayfishVehicleMod-1.16.X" value="PREVIEW" />
+        <entry key="D:/WTF/mods/Arredi Casa" value="PREVIEW" />
+        <entry key="D:/WTF/mods/BabyMod" value="PREVIEW" />
+        <entry key="D:/WTF/mods/ColorFood" value="PREVIEW" />
+        <entry key="D:/WTF/mods/GamesMod" value="PREVIEW" />
+        <entry key="D:/WTF/mods/GunMod" value="PREVIEW" />
+        <entry key="D:/WTF/mods/KitcheMod" value="PREVIEW" />
+        <entry key="D:/WTF/mods/KitchenMod" value="PREVIEW" />
+        <entry key="D:/WTF/mods/MermaidTail Mod" value="PREVIEW" />
+        <entry key="D:/WTF/mods/PopItMod" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ike.youtubedownloader.Main" />
+      <module name="YoutubeDownloader" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ike.youtubedownloader.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
