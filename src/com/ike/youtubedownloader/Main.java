@@ -16,14 +16,13 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<YoutubeVideo> youtubeVideos = searchYoutubeVideos(2, "https://www.youtube.com/playlist?list=PL7gxY-4Ay7veO78TO1ZqAdyr4t1XIsbJ3");
-        for (YoutubeVideo video : youtubeVideos) {
-            System.out.println(video);
-        }
         Downloader downloader = new Downloader();
         downloader.setDllPath("D:\\Musica\\DLL");
         downloader.setOutPath("D:\\Musica\\Download");
-        downloader.download(youtubeVideos.get(1));
+        ArrayList<YoutubeVideo> youtubeVideos = searchYoutubeVideos("https://www.youtube.com/playlist?list=PL7gxY-4Ay7veO78TO1ZqAdyr4t1XIsbJ3");
+        for (YoutubeVideo video : youtubeVideos) {
+            downloader.download(video);
+        }
     }
 
     private static ArrayList<YoutubeVideo> searchYoutubeVideos(String... urls) {

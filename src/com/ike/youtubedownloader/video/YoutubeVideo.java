@@ -20,7 +20,7 @@ public class YoutubeVideo {
 
     public YoutubeVideo(String code) {
         this.code = code;
-        this.thumbnailUrl = "https://i.ytimg.com/vi/" + code + "/hq720.jpg";
+        this.thumbnailUrl = "https://i.ytimg.com/vi/" + code + "/hqdefault.jpg";
     }
 
     public YoutubeVideo() {

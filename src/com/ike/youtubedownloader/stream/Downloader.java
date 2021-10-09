@@ -1,11 +1,14 @@
 package com.ike.youtubedownloader.stream;
 
+import com.ike.youtubedownloader.stream.callback.DownloadCallback;
+import com.ike.youtubedownloader.stream.callback.SimpleDownloaderCallback;
 import com.ike.youtubedownloader.video.YoutubeVideo;
 import com.mpatric.mp3agic.BaseException;
 import com.mpatric.mp3agic.ID3v24Tag;
 import com.mpatric.mp3agic.Mp3File;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +34,7 @@ public class Downloader {
     }
 
     private void downloadVideo(Process cmd, YoutubeVideo video) throws InterruptedException {
-        DownloadCallback downloadCallback = (percent, speed, eta) -> System.out.printf("[download]%s, %s, %s\n", percent, speed, eta);
+        DownloadCallback downloadCallback = new SimpleDownloaderCallback();
         new Thread(new SyncPipe(cmd.getInputStream(), System.out, downloadCallback)).start();
         new Thread(new SyncPipe(cmd.getErrorStream(), System.err, downloadCallback)).start();
         PrintWriter printWriter = new PrintWriter(cmd.getOutputStream());
@@ -51,9 +54,6 @@ public class Downloader {
 
     private void applyTag(YoutubeVideo video) throws IOException, BaseException {
         File songFile = new File(this.outPath, video.getCode() + "1.mp3");
-        ByteArrayOutputStream imageStream = new ByteArrayOutputStream();
-        ImageIO.write(video.getThumbnail(), "JPG", imageStream);
-        byte[] bytes = imageStream.toByteArray();
         Mp3File song = new Mp3File(songFile);
         ID3v24Tag tag = new ID3v24Tag();
         if (song.hasId3v2Tag() && song.getId3v2Tag() instanceof ID3v24Tag) {
@@ -61,7 +61,13 @@ public class Downloader {
         } else {
             song.setId3v2Tag(tag);
         }
-        tag.setAlbumImage(bytes, "Song Cover");
+        BufferedImage thumbnail = video.getThumbnail();
+        if (thumbnail != null) {
+            ByteArrayOutputStream imageStream = new ByteArrayOutputStream();
+            ImageIO.write(thumbnail, "JPG", imageStream);
+            byte[] bytes = imageStream.toByteArray();
+            tag.setAlbumImage(bytes, "Song Cover");
+        }
         if (video.getAuthor() != null) {
             tag.setArtist(video.getAuthor());
         }

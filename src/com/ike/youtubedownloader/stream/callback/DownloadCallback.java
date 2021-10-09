@@ -1,4 +1,4 @@
-package com.ike.youtubedownloader.stream;
+package com.ike.youtubedownloader.stream.callback;
 
 /**
  * @author Ike
