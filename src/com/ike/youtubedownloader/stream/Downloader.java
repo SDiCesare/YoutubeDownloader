@@ -54,6 +54,10 @@ public class Downloader {
 
     private void applyTag(YoutubeVideo video) throws IOException, BaseException {
         File songFile = new File(this.outPath, video.getCode() + "1.mp3");
+        if (!songFile.exists()) {
+            System.out.println("[error] Can't Apply tag to song " + video.getCode());
+            return;
+        }
         Mp3File song = new Mp3File(songFile);
         ID3v24Tag tag = new ID3v24Tag();
         if (song.hasId3v2Tag() && song.getId3v2Tag() instanceof ID3v24Tag) {
