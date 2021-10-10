@@ -1,5 +1,6 @@
 package com.ike.youtubedownloader.swing;
 
+import com.ike.youtubedownloader.stream.Downloader;
 import com.ike.youtubedownloader.stream.Searcher;
 import com.ike.youtubedownloader.video.YoutubeVideo;
 
@@ -15,8 +16,13 @@ import java.util.ArrayList;
  **/
 public class Frame extends JFrame {
 
+    public static Downloader downloader;
+
     public static void main(String[] args) {
         Frame frame = new Frame();
+        downloader = new Downloader();
+        downloader.setDllPath("D:\\Musica\\DLL");
+        downloader.setOutPath("D:\\Musica\\Download");
         frame.setVisible(true);
     }
 

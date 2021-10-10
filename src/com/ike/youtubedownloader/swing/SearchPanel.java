@@ -20,6 +20,8 @@ public class SearchPanel extends JPanel {
         this.videosPanel.setSize(new Dimension(670, 0));
         this.videosPanel.setLayout(null);
         this.pane = new JScrollPane(this.videosPanel);
+        this.pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        this.pane.getVerticalScrollBar().setUnitIncrement(5);
         this.setLayout(null);
         this.add(pane);
     }

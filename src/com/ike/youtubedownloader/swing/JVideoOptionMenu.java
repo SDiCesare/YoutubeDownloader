@@ -20,9 +20,7 @@ public class JVideoOptionMenu extends JPopupMenu {
         super();
         this.video = video;
         JMenuItem downloadItem = new JMenuItem("Download");
-        downloadItem.addActionListener((e) -> {
-            System.out.println("Download: " + this.video);
-        });
+        downloadItem.addActionListener((e) -> Frame.downloader.download(this.video));
         JMenuItem openVideo = new JMenuItem("Open in Browser");
         openVideo.addActionListener((e) -> {
             try {
@@ -31,9 +29,15 @@ public class JVideoOptionMenu extends JPopupMenu {
                 ex.printStackTrace();
             }
         });
+        JMenuItem modifyTag = new JMenuItem("Modify Tags");
+        modifyTag.addActionListener((e) -> {
+            System.out.println("Modify Tags");
+        });
         this.add(downloadItem);
         this.addSeparator();
         this.add(openVideo);
+        this.addSeparator();
+        this.add(modifyTag);
     }
 
 }
