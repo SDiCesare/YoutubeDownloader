@@ -14,7 +14,7 @@ public class HintTextField extends JTextField {
     private String hintText;
 
     public HintTextField(String hintText) {
-        super();
+        super(hintText);
         this.hintText = hintText;
         this.setFont(this.getFont().deriveFont(20.f));
         this.addFocusListener(new FocusAdapter() {

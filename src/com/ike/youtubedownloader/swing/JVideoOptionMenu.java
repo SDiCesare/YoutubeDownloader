@@ -31,7 +31,7 @@ public class JVideoOptionMenu extends JPopupMenu {
         });
         JMenuItem modifyTag = new JMenuItem("Modify Tags");
         modifyTag.addActionListener((e) -> {
-            System.out.println("Modify Tags");
+            Frame.frame.activeVideo(this.video);
         });
         this.add(downloadItem);
         this.addSeparator();

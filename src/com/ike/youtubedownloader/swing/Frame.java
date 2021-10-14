@@ -17,9 +17,10 @@ import java.util.ArrayList;
 public class Frame extends JFrame {
 
     public static Downloader downloader;
+    public static Frame frame;
 
     public static void main(String[] args) {
-        Frame frame = new Frame();
+        frame = new Frame();
         downloader = new Downloader();
         downloader.setDllPath("D:\\Musica\\DLL");
         downloader.setOutPath("D:\\Musica\\Download");
@@ -30,16 +31,32 @@ public class Frame extends JFrame {
     private HintTextField searchField;
     private JButton searchButton;
     private SearchPanel searchPanel;
-    private final ActionListener downloadAction = (e) -> new Thread(() -> {
+    private final ActionListener searchAction = (e) -> new Thread(() -> {
         this.searchPanel.resetVideos();
+        this.activeVideo = null;
+        this.titleField.setEnabled(false);
+        this.artistField.setEnabled(false);
         String text = this.searchField.getText();
+        if (text == null || text.equals("")) {
+            this.actionLabel.setText("Can't search an empty String");
+            return;
+        }
+        this.actionLabel.setText("Searching for: " + text);
         System.out.println("Searching for: " + text);
         ArrayList<YoutubeVideo> search = Searcher.search(text, 3);
         for (YoutubeVideo video : search) {
             this.searchPanel.addVideo(video);
         }
+        this.actionLabel.setText("Found: " + search.size() + " videos");
         Frame.this.repaint();
+        this.titleField.setEnabled(false);
+        this.artistField.setEnabled(false);
     }).start();
+    private JLabel actionLabel;
+    private HintTextField titleField;
+    private HintTextField artistField;
+    private JButton downloadActive;
+    private YoutubeVideo activeVideo;
 
     public Frame() {
         super("Youtube Downloader");
@@ -54,18 +71,56 @@ public class Frame extends JFrame {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    downloadAction.actionPerformed(null);
+                    searchAction.actionPerformed(null);
                 }
             }
         });
         this.searchButton = new JButton("Search");
         this.searchButton.setBounds(570, 15, 100, 50);
-        this.searchButton.addActionListener(downloadAction);
+        this.searchButton.addActionListener(searchAction);
         this.searchPanel = new SearchPanel();
         this.searchPanel.setBounds(10, 100, 670, 300);
         this.add(this.searchField);
         this.add(this.searchButton);
         this.add(this.searchPanel);
+        this.actionLabel = new JLabel();
+        this.actionLabel.setBounds(10, 410, 670, 30);
+        this.add(this.actionLabel);
+        //YoutubeVideo Fields
+        this.artistField = new HintTextField("Artist");
+        this.artistField.setBounds(10, 450, 670, 50);
+        this.titleField = new HintTextField("Title");
+        this.titleField.setBounds(10, 520, 670, 50);
+        this.artistField.setEnabled(false);
+        this.titleField.setEnabled(false);
+        this.downloadActive = new JButton("Download");
+        this.downloadActive.setBounds(300, 600, 100, 50);
+        this.downloadActive.addActionListener((e) -> {
+            new Thread(() -> {
+                if (this.activeVideo == null) {
+                    this.actionLabel.setText("Can't Download a null video");
+                    System.out.println("Can't Download a null video");
+                } else {
+                    this.activeVideo.setAuthor(this.artistField.getText());
+                    this.activeVideo.setTitle(this.titleField.getText());
+                    this.actionLabel.setText("Downloading " + this.activeVideo);
+                    System.out.println(this.activeVideo);
+                    downloader.download(this.activeVideo);
+                }
+            }).start();
+        });
+        this.add(this.artistField);
+        this.add(this.titleField);
+        this.add(this.downloadActive);
+    }
+
+    public void activeVideo(YoutubeVideo video) {
+        this.actionLabel.setText("Modify tag for video: " + video.getURL());
+        this.activeVideo = video;
+        this.artistField.setText(video.getAuthor());
+        this.artistField.setEnabled(true);
+        this.titleField.setText(video.getTitle());
+        this.titleField.setEnabled(true);
     }
 
 }
