@@ -20,7 +20,7 @@ public class JVideoOptionMenu extends JPopupMenu {
         super();
         this.video = video;
         JMenuItem downloadItem = new JMenuItem("Download");
-        downloadItem.addActionListener((e) -> Frame.downloader.download(this.video));
+        downloadItem.addActionListener((e) -> Frame.frame.download(this.video));
         JMenuItem openVideo = new JMenuItem("Open in Browser");
         openVideo.addActionListener((e) -> {
             try {

@@ -2,6 +2,7 @@ package com.ike.youtubedownloader.swing;
 
 import com.ike.youtubedownloader.stream.Downloader;
 import com.ike.youtubedownloader.stream.Searcher;
+import com.ike.youtubedownloader.swing.menu.MenuBar;
 import com.ike.youtubedownloader.video.YoutubeVideo;
 
 import javax.swing.*;
@@ -21,13 +22,14 @@ public class Frame extends JFrame {
 
     public static void main(String[] args) {
         frame = new Frame();
+        frame.setJMenuBar(new MenuBar());
         downloader = new Downloader();
         downloader.setDllPath("D:\\Musica\\DLL");
         downloader.setOutPath("D:\\Musica\\Download");
         frame.setVisible(true);
     }
 
-
+    private DownloadsFrame downloads;
     private HintTextField searchField;
     private JButton searchButton;
     private SearchPanel searchPanel;
@@ -65,6 +67,7 @@ public class Frame extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLayout(null);
+        this.downloads = new DownloadsFrame();
         this.searchField = new HintTextField("Search a Video");
         this.searchField.setBounds(10, 15, 550, 50);
         this.searchField.addKeyListener(new KeyAdapter() {
@@ -104,14 +107,21 @@ public class Frame extends JFrame {
                     this.activeVideo.setAuthor(this.artistField.getText());
                     this.activeVideo.setTitle(this.titleField.getText());
                     this.actionLabel.setText("Downloading " + this.activeVideo);
-                    System.out.println(this.activeVideo);
-                    downloader.download(this.activeVideo);
+                    this.download(this.activeVideo);
                 }
             }).start();
         });
         this.add(this.artistField);
         this.add(this.titleField);
         this.add(this.downloadActive);
+    }
+
+    public void download(YoutubeVideo video) {
+        if (!this.downloads.isVisible()) {
+            this.downloads.setVisible(true);
+            this.downloads.setLocationRelativeTo(this);
+        }
+        this.downloads.addDownloadProcess(video);
     }
 
     public void activeVideo(YoutubeVideo video) {

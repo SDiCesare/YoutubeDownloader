@@ -13,6 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  * @author Ike
@@ -20,26 +21,49 @@ import java.io.PrintWriter;
  **/
 public class Downloader {
 
+    private ArrayList<YoutubeVideo> queue = new ArrayList<>();
+    private ArrayList<DownloadCallback> callbacks = new ArrayList<>();
+
     private String dllPath;
     private String outPath;
+    private boolean running;
 
-    public void download(YoutubeVideo video) {
-        try {
-            System.out.println("Downloading: " + video.getTitle() + "-" + video.getAuthor());
-            downloadVideo(getCMD(), video);
-            applyTag(video);
-        } catch (IOException | InterruptedException | BaseException ex) {
-            ex.printStackTrace();
+    public void download(YoutubeVideo video, DownloadCallback callback) {
+        this.queue.add(video);
+        this.callbacks.add(callback);
+        if (!this.running) {
+            new Thread(this::downloadProcess).start();
         }
     }
 
-    private void downloadVideo(Process cmd, YoutubeVideo video) throws InterruptedException {
-        DownloadCallback downloadCallback = new SimpleDownloaderCallback();
-        new Thread(new SyncPipe(cmd.getInputStream(), System.out, downloadCallback)).start();
-        new Thread(new SyncPipe(cmd.getErrorStream(), System.err, downloadCallback)).start();
+    public void download(YoutubeVideo video) {
+        this.download(video, new SimpleDownloaderCallback());
+    }
+
+    private void downloadProcess() {
+        this.running = true;
+        while (!queue.isEmpty()) {
+            System.out.println("In Queue: " + queue.size());
+            YoutubeVideo video = queue.remove(0);
+            DownloadCallback callback = callbacks.remove(0);
+            try {
+                System.out.println("Downloading: " + video.getTitle() + "-" + video.getAuthor());
+                downloadVideo(getCMD(), video, callback);
+                applyTag(video);
+            } catch (IOException | InterruptedException | BaseException ex) {
+                ex.printStackTrace();
+            }
+            callback.callback(" 100%", "NaN", "NaN");
+        }
+        this.running = false;
+    }
+
+    private void downloadVideo(Process cmd, YoutubeVideo video, DownloadCallback callback) throws InterruptedException {
+        new Thread(new SyncPipe(cmd.getInputStream(), System.out, callback)).start();
+        new Thread(new SyncPipe(cmd.getErrorStream(), System.err, callback)).start();
         PrintWriter printWriter = new PrintWriter(cmd.getOutputStream());
         printWriter.println("cd \"" + this.dllPath + "\"");
-        String file = "\"" + this.outPath + "\\song.mp3\"";
+        String file = "\"" + this.outPath + "\\" + video.getCode() + "_origin.mp3\"";
         String downloadCommand = "youtube-dl -x --audio-format mp3 -o " + file + " " + video.getURL();
         printWriter.println(downloadCommand);
         printWriter.println("ffmpeg -i " + file + " -vn -ar 44100 -ac 2 -b:a 192k \"" + this.outPath + "\\" + video.getCode() + "1.mp3\"");

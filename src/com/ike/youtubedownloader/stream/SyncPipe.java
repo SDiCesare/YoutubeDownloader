@@ -45,7 +45,7 @@ public class SyncPipe implements Runnable {
         String percent = text.substring(text.indexOf("]") + 1, i + 1);
         i = text.indexOf("at");
         int etaIndex = text.indexOf("ETA");
-        if (i == -1 || etaIndex == -1)
+        if (i == -1 || etaIndex == -1 || (i + 3) > etaIndex)
             return;
         String speed = text.substring(i + 3, etaIndex);
         String eta = text.substring(etaIndex + 4, etaIndex + 9);
