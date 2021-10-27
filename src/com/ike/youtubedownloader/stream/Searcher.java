@@ -80,7 +80,7 @@ public class Searcher {
             YoutubeVideo video = getVideoFromURL(code, getPageContent(url));
             if (!videos.contains(video)) {
                 videos.add(video);
-                if (videos.size() == n) {
+                if (n != 0 && videos.size() == n) {
                     return videos;
                 }
             }

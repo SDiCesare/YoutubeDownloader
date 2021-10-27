@@ -3,12 +3,11 @@ package com.ike.youtubedownloader.swing;
 import com.ike.youtubedownloader.stream.Downloader;
 import com.ike.youtubedownloader.stream.Searcher;
 import com.ike.youtubedownloader.swing.menu.MenuBar;
+import com.ike.youtubedownloader.util.Settings;
 import com.ike.youtubedownloader.video.YoutubeVideo;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
@@ -45,11 +44,27 @@ public class Frame extends JFrame {
         }
         this.actionLabel.setText("Searching for: " + text);
         System.out.println("Searching for: " + text);
-        ArrayList<YoutubeVideo> search = Searcher.search(text, 3);
+        if (Settings.get(Settings.DIRECT_DOWNLOAD).equals("true")) {
+            ArrayList<YoutubeVideo> search = Searcher.search(text, 1);
+            if (search.size() > 0) {
+                YoutubeVideo video = search.get(0);
+                this.searchPanel.addVideo(video);
+                this.download(video);
+                this.actionLabel.setText("Downloading " + video.toString());
+            } else {
+                this.actionLabel.setText("Video/s not Found");
+            }
+            return;
+        }
+        ArrayList<YoutubeVideo> search = Searcher.search(text, Integer.parseInt(Settings.get(Settings.RESULTS)));
         for (YoutubeVideo video : search) {
             this.searchPanel.addVideo(video);
         }
-        this.actionLabel.setText("Found: " + search.size() + " videos");
+        if (search.size() > 0) {
+            this.actionLabel.setText("Found: " + search.size() + " videos");
+        } else {
+            this.actionLabel.setText("Video/s not Found");
+        }
         Frame.this.repaint();
         this.titleField.setEnabled(false);
         this.artistField.setEnabled(false);
@@ -57,7 +72,9 @@ public class Frame extends JFrame {
     private JLabel actionLabel;
     private HintTextField titleField;
     private HintTextField artistField;
+    private JButton saveTag;
     private JButton downloadActive;
+    private JButton downloadAll;
     private YoutubeVideo activeVideo;
 
     public Frame() {
@@ -67,6 +84,13 @@ public class Frame extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLayout(null);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                Settings.save();
+            }
+        });
         this.downloads = new DownloadsFrame();
         this.searchField = new HintTextField("Search a Video");
         this.searchField.setBounds(10, 15, 550, 50);
@@ -96,24 +120,45 @@ public class Frame extends JFrame {
         this.titleField.setBounds(10, 520, 670, 50);
         this.artistField.setEnabled(false);
         this.titleField.setEnabled(false);
+        this.saveTag = new JButton("Save Tag");
+        this.saveTag.setBounds(100, 600, 100, 50);
+        this.saveTag.addActionListener((e) -> {
+            if (this.activeVideo == null) {
+                this.actionLabel.setText("Can't Download a null video");
+                System.out.println("Can't Download a null video");
+            } else {
+                this.activeVideo.setAuthor(this.artistField.getText());
+                this.activeVideo.setTitle(this.titleField.getText());
+                this.repaint();
+            }
+        });
         this.downloadActive = new JButton("Download");
-        this.downloadActive.setBounds(300, 600, 100, 50);
-        this.downloadActive.addActionListener((e) -> {
-            new Thread(() -> {
-                if (this.activeVideo == null) {
-                    this.actionLabel.setText("Can't Download a null video");
-                    System.out.println("Can't Download a null video");
-                } else {
-                    this.activeVideo.setAuthor(this.artistField.getText());
-                    this.activeVideo.setTitle(this.titleField.getText());
-                    this.actionLabel.setText("Downloading " + this.activeVideo);
-                    this.download(this.activeVideo);
-                }
-            }).start();
+        this.downloadActive.setBounds(250, 600, 100, 50);
+        this.downloadActive.addActionListener((e) -> new Thread(() -> {
+            if (this.activeVideo == null) {
+                this.actionLabel.setText("Can't Download a null video");
+                System.out.println("Can't Download a null video");
+            } else {
+                this.activeVideo.setAuthor(this.artistField.getText());
+                this.activeVideo.setTitle(this.titleField.getText());
+                this.actionLabel.setText("Downloading " + this.activeVideo);
+                this.download(this.activeVideo);
+            }
+        }).start());
+        this.downloadAll = new JButton("Download All");
+        this.downloadAll.setBounds(400, 600, 120, 50);
+        this.downloadAll.addActionListener((e) -> {
+            ArrayList<YoutubeVideo> videos = this.searchPanel.getVideos();
+            this.actionLabel.setText("Downloading " + videos.size() + " videos");
+            for (YoutubeVideo video : videos) {
+                this.download(video);
+            }
         });
         this.add(this.artistField);
         this.add(this.titleField);
+        this.add(this.saveTag);
         this.add(this.downloadActive);
+        this.add(this.downloadAll);
     }
 
     public void download(YoutubeVideo video) {

@@ -2,6 +2,7 @@ package com.ike.youtubedownloader.stream;
 
 import com.ike.youtubedownloader.stream.callback.DownloadCallback;
 import com.ike.youtubedownloader.stream.callback.SimpleDownloaderCallback;
+import com.ike.youtubedownloader.util.Settings;
 import com.ike.youtubedownloader.video.YoutubeVideo;
 import com.mpatric.mp3agic.BaseException;
 import com.mpatric.mp3agic.ID3v24Tag;
@@ -96,17 +97,26 @@ public class Downloader {
             byte[] bytes = imageStream.toByteArray();
             tag.setAlbumImage(bytes, "Song Cover");
         }
-        if (video.getAuthor() != null) {
-            tag.setArtist(video.getAuthor());
+        String author = video.getAuthor();
+        if (author != null) {
+            tag.setArtist(author);
         }
         if (video.getTitle() != null) {
             tag.setTitle(video.getTitle());
         }
         tag.setComment("Origin: " + video.getURL());
-        File out = new File(this.outPath, video.getCode() + ".mp3");
+        String name = video.getCode() + ".mp3";
+        if (Settings.get(Settings.SAVE_ARTIST).equals("true") && author != null) {
+            File dir = new File(this.outPath, author);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            name = author + "\\" + name;
+        }
+        File out = new File(this.outPath, name);
         song.save(out.toString());
         System.out.println("Tag Applied to song");
-        System.out.println("Clear cache: " + songFile.delete() + ", " + new File(this.outPath, "song.mp3").delete());
+        System.out.println("Clear cache: " + songFile.delete() + ", " + new File(this.outPath, video.getCode() + "_origin.mp3").delete());
     }
 
     private Process getCMD() throws IOException {

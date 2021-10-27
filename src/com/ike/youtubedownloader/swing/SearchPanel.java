@@ -4,6 +4,7 @@ import com.ike.youtubedownloader.video.YoutubeVideo;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * @author Ike
@@ -50,6 +51,16 @@ public class SearchPanel extends JPanel {
         this.videosPanel.setPreferredSize(new Dimension(size.width, size.height + panel.getHeight()));
         this.videosPanel.setSize(new Dimension(size.width, size.height + panel.getHeight()));
         this.videosPanel.add(panel);
+    }
+
+    public ArrayList<YoutubeVideo> getVideos() {
+        ArrayList<YoutubeVideo> videos = new ArrayList<>();
+        for (Component c : this.videosPanel.getComponents()) {
+            if (c instanceof VideoPanel) {
+                videos.add(((VideoPanel) c).getVideo());
+            }
+        }
+        return videos;
     }
 
 }

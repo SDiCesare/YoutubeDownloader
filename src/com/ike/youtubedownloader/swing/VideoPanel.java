@@ -44,4 +44,8 @@ public class VideoPanel extends JPanel {
         g.setFont(g.getFont().deriveFont(15.f));
         g.drawString(video.getAuthor(), x + 10, 65);
     }
+
+    public YoutubeVideo getVideo() {
+        return video;
+    }
 }
