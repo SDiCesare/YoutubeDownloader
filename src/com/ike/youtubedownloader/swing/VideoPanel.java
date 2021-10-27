@@ -40,9 +40,11 @@ public class VideoPanel extends JPanel {
         int x = (int) (this.getHeight() * 1.5);
         g.drawImage(this.thumbnail, 5, 5, x, this.getHeight() - 10, null);
         g.setFont(new Font(null, Font.PLAIN, 20));
-        g.drawString(video.getTitle(), x + 10, 50);
+        if (video.getTitle() != null)
+            g.drawString(video.getTitle(), x + 10, 50);
         g.setFont(g.getFont().deriveFont(15.f));
-        g.drawString(video.getAuthor(), x + 10, 65);
+        if (video.getAuthor() != null)
+            g.drawString(video.getAuthor(), x + 10, 65);
     }
 
     public YoutubeVideo getVideo() {

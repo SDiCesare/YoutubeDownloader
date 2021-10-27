@@ -23,7 +23,7 @@ public class Searcher {
                 videos.add(videoFromURL);
             } else if (research.contains("playlist?list")) {
                 URL url = new URL(research);
-                videos.addAll(getCodes(getPageContent(url), n));
+                videos.addAll(getCodes(getPageContent(url), 0));
             } else {
                 URL url = new URL("https://www.youtube.com/results?search_query=" + research.replace(" ", "+"));
                 videos.addAll(getCodes(getPageContent(url), n));

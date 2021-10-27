@@ -57,17 +57,7 @@ public class Frame extends JFrame {
             return;
         }
         ArrayList<YoutubeVideo> search = Searcher.search(text, Integer.parseInt(Settings.get(Settings.RESULTS)));
-        for (YoutubeVideo video : search) {
-            this.searchPanel.addVideo(video);
-        }
-        if (search.size() > 0) {
-            this.actionLabel.setText("Found: " + search.size() + " videos");
-        } else {
-            this.actionLabel.setText("Video/s not Found");
-        }
-        Frame.this.repaint();
-        this.titleField.setEnabled(false);
-        this.artistField.setEnabled(false);
+        setVideos(search);
     }).start();
     private JLabel actionLabel;
     private HintTextField titleField;
@@ -148,7 +138,7 @@ public class Frame extends JFrame {
         this.downloadAll = new JButton("Download All");
         this.downloadAll.setBounds(400, 600, 120, 50);
         this.downloadAll.addActionListener((e) -> {
-            ArrayList<YoutubeVideo> videos = this.searchPanel.getVideos();
+            ArrayList<YoutubeVideo> videos = this.getVideos();
             this.actionLabel.setText("Downloading " + videos.size() + " videos");
             for (YoutubeVideo video : videos) {
                 this.download(video);
@@ -159,6 +149,24 @@ public class Frame extends JFrame {
         this.add(this.saveTag);
         this.add(this.downloadActive);
         this.add(this.downloadAll);
+    }
+
+    public ArrayList<YoutubeVideo> getVideos() {
+        return this.searchPanel.getVideos();
+    }
+
+    public void setVideos(ArrayList<YoutubeVideo> videos) {
+        for (YoutubeVideo video : videos) {
+            this.searchPanel.addVideo(video);
+        }
+        if (videos.size() > 0) {
+            this.actionLabel.setText("Found: " + videos.size() + " videos");
+        } else {
+            this.actionLabel.setText("Video/s not Found");
+        }
+        Frame.this.repaint();
+        this.titleField.setEnabled(false);
+        this.artistField.setEnabled(false);
     }
 
     public void download(YoutubeVideo video) {

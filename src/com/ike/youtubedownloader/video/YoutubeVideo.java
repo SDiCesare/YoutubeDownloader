@@ -13,6 +13,37 @@ import java.net.URL;
  **/
 public class YoutubeVideo {
 
+    public static YoutubeVideo fromJson(String json) {
+        //Format: {code=xxx,author=xxx,title=xxx}
+        json = json.substring(1, json.length() - 1);
+        String[] vars = json.split(",");
+        if (!vars[0].contains("code")) {
+            throw new IllegalArgumentException("Invalid Json format: Code Missing!");
+        }
+        //Code
+        String[] code = vars[0].split("=");
+        YoutubeVideo video = new YoutubeVideo(code[1]);
+        if (vars.length > 1) {
+            if (vars[1].contains("author")) {
+                String[] author = vars[1].split("=");
+                video.author = author[1];
+            } else if (vars[1].contains("title")) {
+                String[] title = vars[1].split("=");
+                video.title = title[1];
+            }
+        }
+        if (vars.length > 2) {
+            if (vars[2].contains("author")) {
+                String[] author = vars[2].split("=");
+                video.author = author[1];
+            } else if (vars[2].contains("title")) {
+                String[] title = vars[2].split("=");
+                video.title = title[1];
+            }
+        }
+        return video;
+    }
+
     private String author;
     private String title;
     private String code;
@@ -27,12 +58,27 @@ public class YoutubeVideo {
 
     }
 
+    public String toJson() {
+        StringBuilder out = new StringBuilder();
+        //{code=xxx,author=xxx,title=xxx}
+        out.append("{").append("code=").append(this.code);
+        if (this.author != null) {
+            out.append(",author=").append(this.author);
+        }
+        if (this.title != null) {
+            out.append(",title=").append(this.title);
+        }
+        out.append("}");
+        return out.toString();
+    }
+
     public BufferedImage getThumbnail() {
         try {
             return ImageIO.read(new URL(this.thumbnailUrl));
         } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
+            //ex.printStackTrace();
+            System.err.println("Can't get thumbnail " + this.thumbnailUrl + " for video code " + this.code);
+            return new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
         }
     }
 

@@ -43,7 +43,8 @@ public class JCallback extends JPanel implements DownloadCallback {
         super.paint(g);
         int width = (int) ((this.getWidth() / 100.f) * this.percent);
         g.setColor(DONE);
-        g.fillRect(1, 1, width - 1, this.getHeight() - 1);
+        int borderSize = 5;
+        g.fillRect(borderSize, borderSize, width - borderSize, this.getHeight() - borderSize);
         g.setColor(Color.BLACK);
         g.drawString(getSongName() + " [" + percent + "%]", 0, 20);
     }
