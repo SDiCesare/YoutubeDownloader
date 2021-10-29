@@ -13,8 +13,8 @@ public class Test {
 
     public static void main(String[] args) {
         Downloader downloader = new Downloader();
-        downloader.setDllPath("D:\\Musica\\DLL");
-        downloader.setOutPath("D:\\Musica\\Download");
+        /*downloader.setDllPath("D:\\Musica\\DLL");
+        downloader.setOutPath("D:\\Musica\\Download");*/
 
         File dir = new File("D:\\Musica\\Download");
         if (dir.isDirectory() && dir.listFiles() != null) {

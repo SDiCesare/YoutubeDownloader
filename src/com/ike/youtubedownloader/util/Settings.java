@@ -12,6 +12,8 @@ public class Settings {
     public static final String DIRECT_DOWNLOAD = "direct_download";
     public static final String SAVE_ARTIST = "save_artist";
     public static final String RESULTS = "results";
+    public static final String DOWNLOAD_DIR = "download_dir";
+    public static final String DLL_DIR = "dll_dir";
 
     private static final String[] SETTINGS_NAME;
     private static final String[] DEFAULT_VALUES;
@@ -19,8 +21,8 @@ public class Settings {
     private static final IniFile settingsFile;
 
     static {
-        SETTINGS_NAME = new String[]{DIRECT_DOWNLOAD, SAVE_ARTIST, RESULTS};
-        DEFAULT_VALUES = new String[]{"false", "true", "30"};
+        SETTINGS_NAME = new String[]{DIRECT_DOWNLOAD, SAVE_ARTIST, RESULTS, DOWNLOAD_DIR, DLL_DIR};
+        DEFAULT_VALUES = new String[]{"false", "true", "30", "", ""};
         settings = new HashMap<>();
         settingsFile = new IniFile("downloaderSettings.ini");
         IniFile.IniProperty property;

@@ -23,12 +23,11 @@ public class Frame extends JFrame {
         frame = new Frame();
         frame.setJMenuBar(new MenuBar());
         downloader = new Downloader();
-        downloader.setDllPath("D:\\Musica\\DLL");
-        downloader.setOutPath("D:\\Musica\\Download");
         frame.setVisible(true);
     }
 
     private DownloadsFrame downloads;
+    private SettingsFrame settingsFrame;
     private HintTextField searchField;
     private JButton searchButton;
     private SearchPanel searchPanel;
@@ -184,6 +183,14 @@ public class Frame extends JFrame {
         this.artistField.setEnabled(true);
         this.titleField.setText(video.getTitle());
         this.titleField.setEnabled(true);
+    }
+
+    public void openSettings() {
+        /*if (this.settingsFrame == null) {
+            this.settingsFrame = new SettingsFrame();
+        }
+        this.settingsFrame.init();*/
+        new SettingsFrame().init();
     }
 
 }
