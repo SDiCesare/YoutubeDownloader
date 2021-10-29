@@ -1,5 +1,6 @@
 package com.ike.youtubedownloader.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -18,13 +19,17 @@ public class Settings {
     private static final String[] SETTINGS_NAME;
     private static final String[] DEFAULT_VALUES;
     private static final HashMap<String, String> settings;
-    private static final IniFile settingsFile;
+    private static IniFile settingsFile;
 
     static {
         SETTINGS_NAME = new String[]{DIRECT_DOWNLOAD, SAVE_ARTIST, RESULTS, DOWNLOAD_DIR, DLL_DIR};
         DEFAULT_VALUES = new String[]{"false", "true", "30", "", ""};
         settings = new HashMap<>();
-        settingsFile = new IniFile("downloaderSettings.ini");
+        loadFrom(new File("downloaderSettings.ini"));
+    }
+
+    public static void loadFrom(File f) {
+        settingsFile = new IniFile(f);
         IniFile.IniProperty property;
         if (settingsFile.getNumberOfProperties() < 1) {
             property = new IniFile.IniProperty();
@@ -51,6 +56,21 @@ public class Settings {
 
     public static String get(String key) {
         return settings.get(key);
+    }
+
+    public static void saveTo(File file) {
+        try {
+            IniFile out = new IniFile(file);
+            IniFile.IniProperty property = new IniFile.IniProperty();
+            out.addProperty("settings", property);
+            for (String settingName : SETTINGS_NAME) {
+                String value = settings.get(settingName);
+                property.addProperty(settingName, value);
+            }
+            out.save();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public static void save() {

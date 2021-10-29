@@ -7,9 +7,6 @@ import com.ike.youtubedownloader.video.YoutubeVideo;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -52,6 +49,28 @@ public class MenuBar extends JMenuBar {
         JMenuItem changeSettings = new JMenuItem("Change Settings");
         changeSettings.addActionListener((e) -> Frame.frame.openSettings());
         settings.add(changeSettings);
+        JMenuItem exportSettings = new JMenuItem("Export Settings");
+        exportSettings.addActionListener((e) -> {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileFilter(new FileNameExtensionFilter("Ini Option File", "ini"));
+            int i = chooser.showOpenDialog(Frame.frame);
+            if (i == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = chooser.getSelectedFile();
+                Settings.saveTo(selectedFile);
+            }
+        });
+        settings.add(exportSettings);
+        JMenuItem importSettings = new JMenuItem("Import Settings");
+        importSettings.addActionListener((e) -> {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileFilter(new FileNameExtensionFilter("Ini Option File", "ini"));
+            int i = chooser.showOpenDialog(Frame.frame);
+            if (i == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = chooser.getSelectedFile();
+                Settings.loadFrom(selectedFile);
+            }
+        });
+        settings.add(importSettings);
         this.add(settings);
     }
 
