@@ -20,8 +20,8 @@ public class SettingsFrame extends JFrame {
     public SettingsFrame() {
         super("Settings");
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        this.setSize(750, 500);
-        this.setResizable(false);
+        this.setSize(746, 429);
+        //this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.getContentPane().setLayout(null);
         Rectangle bounds = new Rectangle(200, 0, 530, 400);
@@ -30,36 +30,34 @@ public class SettingsFrame extends JFrame {
         this.generalSettings.setBounds(bounds);
         this.generalSettings.setBorder(BorderFactory.createLineBorder(Color.RED));
         this.generalSettings.setLayout(null);
-        JLabel dllLabel = new JLabel("DLL Path:");
-        dllLabel.setBounds(10, 20, 200, 40);
-        JTextField dll = new JTextField(Settings.get(Settings.DLL_DIR));
-        dll.setBounds(220, 20, 300, 40);
-        this.generalSettings.add(dllLabel);
+        DescriptionTextField dll = new DescriptionTextField("DLL Path: ");
+        dll.setBounds(0, 20, 530, 40);
+        dll.setFieldValue(Settings.get(Settings.DLL_DIR));
         this.generalSettings.add(dll);
         //Download Settings
         this.downloadSettings = new JPanel();
         this.downloadSettings.setBounds(bounds);
         this.downloadSettings.setLayout(null);
         this.downloadSettings.setBorder(BorderFactory.createLineBorder(Color.RED));
-        JLabel outLabel = new JLabel("Downloads Path:");
-        outLabel.setBounds(10, 20, 200, 40);
-        JTextField out = new JTextField(Settings.get(Settings.DOWNLOAD_DIR));
-        out.setBounds(220, 20, 300, 40);
+        DescriptionTextField outPath = new DescriptionTextField("Downloads Path:");
+        outPath.setBounds(0, 20, 530, 40);
+        outPath.setFieldValue(Settings.get(Settings.DOWNLOAD_DIR));
         JCheckBox directDownload = new JCheckBox("Directly Download Research");
         directDownload.setSelected(Boolean.parseBoolean(Settings.get(Settings.DIRECT_DOWNLOAD)));
-        directDownload.setBounds(10, 70, 200, 40);
+        directDownload.setBounds(0, 70, 530, 40);
+        directDownload.setBorder(BorderFactory.createMatteBorder(2, 0, 2, 0, Color.BLACK));
+        directDownload.setBorderPainted(true);
         JCheckBox saveArtist = new JCheckBox("Save in Artist Directory");
+        saveArtist.setBorderPainted(true);
         saveArtist.setSelected(Boolean.parseBoolean(Settings.get(Settings.SAVE_ARTIST)));
-        saveArtist.setBounds(10, 120, 200, 40);
-        JLabel resultsLabel = new JLabel("Number of Max Results:");
-        resultsLabel.setBounds(10, 170, 200, 40);
-        JTextField results = new JTextField(Settings.get(Settings.RESULTS));
-        results.setBounds(220, 170, 300, 40);
-        this.downloadSettings.add(outLabel);
-        this.downloadSettings.add(out);
+        saveArtist.setBounds(0, 120, 530, 40);
+        saveArtist.setBorder(BorderFactory.createMatteBorder(2, 0, 2, 0, Color.BLACK));
+        DescriptionTextField results = new DescriptionTextField("Number of Max Results:");
+        results.setBounds(0, 170, 530, 40);
+        results.setFieldValue(Settings.get(Settings.RESULTS));
+        this.downloadSettings.add(outPath);
         this.downloadSettings.add(directDownload);
         this.downloadSettings.add(saveArtist);
-        this.downloadSettings.add(resultsLabel);
         this.downloadSettings.add(results);
         //Settings Menu
         this.settingsMenu = new JPanel();
@@ -69,15 +67,25 @@ public class SettingsFrame extends JFrame {
         addSettingMenu("General Settings", this.generalSettings);
         addSettingMenu("Download Settings", this.downloadSettings);
         JButton applyChanges = new JButton("Apply Changes");
-        applyChanges.setBounds(25, 350, 150, 40);
+        applyChanges.setBounds(25, 340, 150, 40);
         applyChanges.addActionListener((e) -> {
-            Settings.change(Settings.DLL_DIR, dll.getText());
-            Settings.change(Settings.DOWNLOAD_DIR, out.getText());
-            Settings.change(Settings.RESULTS, results.getText());
+            Settings.change(Settings.DLL_DIR, dll.getFieldValue());
+            Settings.change(Settings.DOWNLOAD_DIR, outPath.getFieldValue());
+            Settings.change(Settings.RESULTS, results.getFieldValue());
             Settings.change(Settings.DIRECT_DOWNLOAD, String.valueOf(directDownload.isSelected()));
             Settings.change(Settings.SAVE_ARTIST, String.valueOf(saveArtist.isSelected()));
         });
         this.settingsMenu.add(applyChanges);
+        /*new Thread(() -> {
+            while(true) {
+                try {
+                    System.out.println(this.getSize());
+                    Thread.sleep(1000L);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }).start();*/
     }
 
     public void init() {
