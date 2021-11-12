@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * A Swing Callback Component
+ *
  * @author Ike
  * @version 1.0A
  **/
@@ -19,6 +21,12 @@ public class JCallback extends JPanel implements DownloadCallback {
     private boolean isDone;
     private float percent;
 
+    /**
+     * Constructor
+     * Create a JCallback for a {@link YoutubeVideo}
+     *
+     * @param video The Video to attach to a JCallback
+     */
     public JCallback(YoutubeVideo video) {
         super();
         this.video = video;
@@ -34,6 +42,9 @@ public class JCallback extends JPanel implements DownloadCallback {
         this.process.setBounds(x, y, width, height);
     }
 
+    /**
+     * Start downloading the Video attached to this Callback
+     */
     public void start() {
         new Thread(() -> Frame.downloader.download(this.video, this)).start();
     }
@@ -48,11 +59,17 @@ public class JCallback extends JPanel implements DownloadCallback {
         g.drawString(getSongName() + " [" + percent + "%]", 0, 20);
     }
 
+    /**
+     * @return The Song Name in format "author - title"
+     */
     private String getSongName() {
         String s = this.video.getAuthor() + "-" + this.video.getTitle();
         return (s.length() > 45) ? s.substring(0, 38) + ".." : s;
     }
 
+    /**
+     * Paint a rectangle of green by the percentage of the download
+     */
     @Override
     public void callback(String percent, String speed, String eta) {
         if (this.isDone)

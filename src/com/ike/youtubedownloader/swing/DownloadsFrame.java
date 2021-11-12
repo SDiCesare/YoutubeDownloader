@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * The Frame with the history of the downloads
+ *
  * @author Ike
  * @version 1.0A
  **/
@@ -28,6 +30,11 @@ public class DownloadsFrame extends JFrame {
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
+    /**
+     * Add a video to download to the history
+     *
+     * @param video The video to ass
+     */
     public void addDownloadProcess(YoutubeVideo video) {
         JCallback callback = new JCallback(video);
         callback.setBorder(BorderFactory.createLineBorder(Color.BLACK));

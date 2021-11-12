@@ -9,11 +9,21 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
+ * The class that manages the Researches
+ *
  * @author Ike
  * @version 1.0A
  **/
 public class Searcher {
 
+
+    /**
+     * Search a list of YoutubeVideos by the research
+     *
+     * @param research The text to search
+     * @param n        The max number of results. set 0 for the max possible results given by Youtube
+     * @return A list of YoutubeVideos result from the research
+     */
     public static ArrayList<YoutubeVideo> search(String research, int n) {
         ArrayList<YoutubeVideo> videos = new ArrayList<>();
         try {
@@ -34,6 +44,10 @@ public class Searcher {
         return videos;
     }
 
+    /**
+     * @param url The url of a html page
+     * @return The HTML content of a page
+     */
     private static StringBuilder getPageContent(URL url) throws IOException {
         InputStreamReader r = new InputStreamReader(url.openStream());
         BufferedReader reader = new BufferedReader(r);
@@ -46,6 +60,13 @@ public class Searcher {
         return text;
     }
 
+    /**
+     * Get a {@link YoutubeVideo} with his tags by the html source and his code
+     *
+     * @param code The unique video code
+     * @param text The HTML text of the youtube page
+     * @return The YoutubeVideo of the specified code
+     */
     private static YoutubeVideo getVideoFromURL(String code, StringBuilder text) {
         YoutubeVideo video = new YoutubeVideo(code);
         //Title
@@ -68,6 +89,14 @@ public class Searcher {
         return video;
     }
 
+
+    /**
+     * Get a n-length list of YoutubeVideo from an HTML source
+     *
+     * @param text The html source
+     * @param n    The max length of the YoutubeVideo list
+     * @return a n-length YoutubeVideo list
+     */
     private static ArrayList<YoutubeVideo> getCodes(StringBuilder text, int n) throws IOException {
         ArrayList<YoutubeVideo> videos = new ArrayList<>();
         while (true) {

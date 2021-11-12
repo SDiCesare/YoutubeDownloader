@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * A text field with a Description on top of it
+ *
  * @author Ike
  * @version 1.0A
  **/
@@ -53,10 +55,19 @@ public class DescriptionTextField extends JPanel {
         }
     }
 
+    /**
+     * @return The text on the TextField
+     */
     public String getFieldValue() {
         return this.field.getText();
     }
 
+
+    /**
+     * Set the text of the TextField
+     *
+     * @param value The text to set
+     */
     public void setFieldValue(String value) {
         this.field.setText(value);
     }

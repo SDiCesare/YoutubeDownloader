@@ -46,9 +46,11 @@ public class MenuBar extends JMenuBar {
         this.add(fileMenu);
         //Settings Menu
         JMenu settings = new JMenu("Settings");
+        //Open the settings frame
         JMenuItem changeSettings = new JMenuItem("Change Settings");
         changeSettings.addActionListener((e) -> Frame.frame.openSettings());
         settings.add(changeSettings);
+        //Export settings to an ini file
         JMenuItem exportSettings = new JMenuItem("Export Settings");
         exportSettings.addActionListener((e) -> {
             JFileChooser chooser = new JFileChooser();
@@ -60,6 +62,7 @@ public class MenuBar extends JMenuBar {
             }
         });
         settings.add(exportSettings);
+        //Import settings from an ini file
         JMenuItem importSettings = new JMenuItem("Import Settings");
         importSettings.addActionListener((e) -> {
             JFileChooser chooser = new JFileChooser();

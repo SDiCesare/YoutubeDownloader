@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
+ * A class used for filter the print output from cmd
+ *
  * @author Ike
  * @version 1.0A
  **/
@@ -38,6 +40,9 @@ public class SyncPipe implements Runnable {
 
     //[download]  33.9% of 3.52MiB at 21.00KiB/s ETA 01:53ad\song.mp3" https://www.youtube.com/watch?v=lhbA8f5Bf8E
 
+    /**
+     * Calls the callback for this object
+     */
     private void callback(String text) {
         int i = text.indexOf("%");
         if (i == -1)

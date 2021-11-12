@@ -1,6 +1,9 @@
 package com.ike.youtubedownloader.stream.callback;
 
 /**
+ * A simple Callback for downloader
+ * Used for tests
+ *
  * @author Ike
  * @version 1.0A
  **/

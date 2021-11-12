@@ -17,15 +17,26 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
+ * The Class that manages the downloads
+ *
  * @author Ike
  * @version 1.0A
  **/
 public class Downloader {
 
+    /**
+     * Each video of the queue has attached a callback
+     */
     private ArrayList<YoutubeVideo> queue = new ArrayList<>();
     private ArrayList<DownloadCallback> callbacks = new ArrayList<>();
     private boolean running;
 
+    /**
+     * Download a video using a callback
+     *
+     * @param video    The video to download
+     * @param callback The callback called for this video
+     */
     public void download(YoutubeVideo video, DownloadCallback callback) {
         this.queue.add(video);
         this.callbacks.add(callback);
@@ -34,10 +45,18 @@ public class Downloader {
         }
     }
 
+    /**
+     * USED FOR TEST
+     * Download a video using the {@link SimpleDownloaderCallback} as callback
+     */
     public void download(YoutubeVideo video) {
         this.download(video, new SimpleDownloaderCallback());
     }
 
+    /**
+     * The process called for downloading videos on the queue.
+     * It download a video, then make a copy of the mp3 for apply mp3 tags and save it on the directory of the downloader.
+     */
     private void downloadProcess() {
         this.running = true;
         while (!queue.isEmpty()) {
@@ -56,6 +75,13 @@ public class Downloader {
         this.running = false;
     }
 
+    /**
+     * Download a Single video
+     *
+     * @param cmd      The prompt environment used for youtube-dl and ffmpeg commands
+     * @param video    The video to download
+     * @param callback The callback for the video to download
+     */
     private void downloadVideo(Process cmd, YoutubeVideo video, DownloadCallback callback) throws InterruptedException {
         new Thread(new SyncPipe(cmd.getInputStream(), System.out, callback)).start();
         new Thread(new SyncPipe(cmd.getErrorStream(), System.err, callback)).start();
@@ -74,6 +100,12 @@ public class Downloader {
         }
     }
 
+    /**
+     * Called after downloading the video.
+     * Apply the mp3 tags of the video to his .mp3 file.
+     *
+     * @param video The video with his tags
+     */
     private void applyTag(YoutubeVideo video) throws IOException, BaseException {
         File songFile = new File(Settings.get(Settings.DOWNLOAD_DIR), video.getCode() + "1.mp3");
         if (!songFile.exists()) {
@@ -116,6 +148,11 @@ public class Downloader {
         System.out.println("Clear cache: " + songFile.delete() + ", " + new File(Settings.get(Settings.DOWNLOAD_DIR), video.getCode() + "_origin.mp3").delete());
     }
 
+    /**
+     * TODO: 12/11/2021 See if it works on other system
+     *
+     * @return the prompt environment
+     */
     private Process getCMD() throws IOException {
         return Runtime.getRuntime().exec("cmd");
     }
