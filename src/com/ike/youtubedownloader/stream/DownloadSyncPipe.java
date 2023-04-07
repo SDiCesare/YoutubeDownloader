@@ -11,13 +11,13 @@ import java.io.OutputStream;
  * @author Ike
  * @version 1.0A
  **/
-public class SyncPipe implements Runnable {
+public class DownloadSyncPipe implements Runnable {
 
     private final OutputStream outputStream;
     private final InputStream inputStream;
     private DownloadCallback callback;
 
-    public SyncPipe(InputStream inputStream, OutputStream outputStream, DownloadCallback callback) {
+    public DownloadSyncPipe(InputStream inputStream, OutputStream outputStream, DownloadCallback callback) {
         this.inputStream = inputStream;
         this.outputStream = outputStream;
         this.callback = callback;
@@ -27,10 +27,13 @@ public class SyncPipe implements Runnable {
         try {
             final byte[] buffer = new byte[1024];
             for (int length; (length = inputStream.read(buffer)) != -1; ) {
-                //outputStream.write(buffer, 0, length);
-                String text = new String(buffer);
-                if (text.contains("[download]")) {
-                    this.callback(text);
+                if (this.callback == null) {
+                    outputStream.write(buffer, 0, length);
+                } else {
+                    String text = new String(buffer);
+                    if (text.contains("[download]")) {
+                        this.callback(text);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -54,7 +57,7 @@ public class SyncPipe implements Runnable {
             return;
         String speed = text.substring(i + 3, etaIndex);
         String eta = text.substring(etaIndex + 4, etaIndex + 9);
-        this.callback.callback(percent, speed, eta);
+        this.callback.downloadCallback(percent, speed, eta);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.ike.youtubedownloader.stream;
 
+import com.ike.youtubedownloader.util.YoutubeVideoUtil;
 import com.ike.youtubedownloader.video.YoutubeVideo;
 
 import java.io.BufferedReader;
@@ -16,7 +17,6 @@ import java.util.ArrayList;
  **/
 public class Searcher {
 
-
     /**
      * Search a list of YoutubeVideos by the research
      *
@@ -27,11 +27,11 @@ public class Searcher {
     public static ArrayList<YoutubeVideo> search(String research, int n) {
         ArrayList<YoutubeVideo> videos = new ArrayList<>();
         try {
-            if (research.contains("watch?v=")) {
+            if (YoutubeVideoUtil.isVideo(research)) {
                 URL url = new URL(research);
-                YoutubeVideo videoFromURL = getVideoFromURL(research.substring(research.indexOf("=") + 1), getPageContent(url));
+                YoutubeVideo videoFromURL = getVideoFromURL(YoutubeVideoUtil.retrieveVideoCodeFromUrL(research), getPageContent(url));
                 videos.add(videoFromURL);
-            } else if (research.contains("playlist?list")) {
+            } else if (YoutubeVideoUtil.isPlaylist(research)) {
                 URL url = new URL(research);
                 videos.addAll(getCodes(getPageContent(url), 0));
             } else {
@@ -57,6 +57,8 @@ public class Searcher {
             text.append(ln).append("\n");
             ln = reader.readLine();
         }
+        System.out.println(text);
+        System.exit(0);
         return text;
     }
 
@@ -91,7 +93,7 @@ public class Searcher {
 
 
     /**
-     * Get a n-length list of YoutubeVideo from an HTML source
+     * Get an n-length list of YoutubeVideo from an HTML source
      *
      * @param text The html source
      * @param n    The max length of the YoutubeVideo list

@@ -14,7 +14,8 @@ public class Settings {
     public static final String SAVE_ARTIST = "save_artist";
     public static final String RESULTS = "results";
     public static final String DOWNLOAD_DIR = "download_dir";
-    public static final String DLL_DIR = "dll_dir";
+    public static final String YOUTUBE_DL_PATH = "youtube_dll_path";
+    public static final String FFMPEG_DL_PATH = "ffmpeg_dll_path";
 
     private static final String[] SETTINGS_NAME;
     private static final String[] DEFAULT_VALUES;
@@ -22,13 +23,18 @@ public class Settings {
     private static IniFile settingsFile;
 
     static {
-        SETTINGS_NAME = new String[]{DIRECT_DOWNLOAD, SAVE_ARTIST, RESULTS, DOWNLOAD_DIR, DLL_DIR};
-        DEFAULT_VALUES = new String[]{"false", "true", "30", "", ""};
+        SETTINGS_NAME = new String[]{DIRECT_DOWNLOAD, SAVE_ARTIST, RESULTS, DOWNLOAD_DIR, YOUTUBE_DL_PATH, FFMPEG_DL_PATH};
+        DEFAULT_VALUES = new String[]{"false", "true", "30", "", "", "", ""};
         settings = new HashMap<>();
         loadFrom(new File("downloaderSettings.ini"));
     }
 
     public static void loadFrom(File f) {
+        if (f.exists()) {
+            System.out.println("Reading Settings from " + f + ".");
+        } else {
+            System.out.println("Creating new settings file.");
+        }
         settingsFile = new IniFile(f);
         IniFile.IniProperty property;
         if (settingsFile.getNumberOfProperties() < 1) {

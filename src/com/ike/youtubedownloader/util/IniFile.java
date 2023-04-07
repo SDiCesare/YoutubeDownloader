@@ -87,7 +87,9 @@ public class IniFile {
     }
 
     public void save() throws IOException {
+        System.out.println("Saving Ini File " + this.file);
         if (file.exists()) {
+            System.out.println("Deleting existing one");
             this.file.delete();
         }
         FileWriter fw = new FileWriter(this.file);
@@ -106,9 +108,10 @@ public class IniFile {
             bw.write("#=========================");
             bw.newLine();
         }
-        this.file.createNewFile();
+        // this.file.createNewFile();
         bw.close();
         fw.close();
+        System.out.println("Ini file saved.");
     }
 
     public ArrayList<IniProperty> getProperties() {
@@ -161,7 +164,7 @@ public class IniFile {
                     if (!ln.contains("=")) continue;
                     String[] values = ln.split("=");
                     String name = values[0];
-                    String value = values[1];
+                    String value = values.length > 1 ? values[1] : "";
                     property.addProperty(name, value);
                 }
             }
@@ -258,7 +261,7 @@ public class IniFile {
 
         public String getValue(String name) {
             int index = this.indexOfName(name);
-            return (index == -1)? null : this.values.get(index);
+            return (index == -1) ? null : this.values.get(index);
         }
 
         public String getValue(int index) {

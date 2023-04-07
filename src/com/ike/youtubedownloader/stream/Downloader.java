@@ -27,8 +27,8 @@ public class Downloader {
     /**
      * Each video of the queue has attached a callback
      */
-    private ArrayList<YoutubeVideo> queue = new ArrayList<>();
-    private ArrayList<DownloadCallback> callbacks = new ArrayList<>();
+    private final ArrayList<YoutubeVideo> queue = new ArrayList<>();
+    private final ArrayList<DownloadCallback> callbacks = new ArrayList<>();
     private boolean running;
 
     /**
@@ -55,7 +55,7 @@ public class Downloader {
 
     /**
      * The process called for downloading videos on the queue.
-     * It download a video, then make a copy of the mp3 for apply mp3 tags and save it on the directory of the downloader.
+     * It downloads a video, then make a copy of the mp3 for apply mp3 tags and save it on the directory of the downloader.
      */
     private void downloadProcess() {
         this.running = true;
@@ -70,7 +70,7 @@ public class Downloader {
             } catch (IOException | InterruptedException | BaseException ex) {
                 ex.printStackTrace();
             }
-            callback.callback(" 100%", "NaN", "NaN");
+            callback.downloadCallback(" 100%", "NaN", "NaN");
         }
         this.running = false;
     }
@@ -83,14 +83,13 @@ public class Downloader {
      * @param callback The callback for the video to download
      */
     private void downloadVideo(Process cmd, YoutubeVideo video, DownloadCallback callback) throws InterruptedException {
-        new Thread(new SyncPipe(cmd.getInputStream(), System.out, callback)).start();
-        new Thread(new SyncPipe(cmd.getErrorStream(), System.err, callback)).start();
+        new Thread(new DownloadSyncPipe(cmd.getInputStream(), System.out, callback)).start();
+        new Thread(new DownloadSyncPipe(cmd.getErrorStream(), System.err, callback)).start();
         PrintWriter printWriter = new PrintWriter(cmd.getOutputStream());
-        printWriter.println("cd \"" + Settings.get(Settings.DLL_DIR) + "\"");
         String file = "\"" + Settings.get(Settings.DOWNLOAD_DIR) + "\\" + video.getCode() + "_origin.mp3\"";
-        String downloadCommand = "youtube-dl -x --audio-format mp3 -o " + file + " " + video.getURL();
+        String downloadCommand = Settings.get(Settings.YOUTUBE_DL_PATH) + " -x --audio-format mp3 -o " + file + " " + video.getURL();
         printWriter.println(downloadCommand);
-        printWriter.println("ffmpeg -i " + file + " -vn -ar 44100 -ac 2 -b:a 192k \"" + Settings.get(Settings.DOWNLOAD_DIR) + "\\" + video.getCode() + "1.mp3\"");
+        printWriter.println(Settings.get(Settings.FFMPEG_DL_PATH) + " -i " + file + " -vn -ar 44100 -ac 2 -b:a 192k \"" + Settings.get(Settings.DOWNLOAD_DIR) + "\\" + video.getCode() + "1.mp3\"");
         printWriter.close();
         int i = cmd.waitFor();
         if (i == 0) {

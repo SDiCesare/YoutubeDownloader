@@ -1,5 +1,7 @@
 package com.ike.youtubedownloader.video;
 
+import com.ike.youtubedownloader.util.InfoYoutubeVideoFile;
+import com.ike.youtubedownloader.util.YoutubeVideoUtil;
 import org.jsoup.Jsoup;
 
 import javax.imageio.ImageIO;
@@ -50,7 +52,11 @@ public class YoutubeVideo {
     private String thumbnailUrl;
 
     public YoutubeVideo(String code) {
-        this.code = code;
+        if (YoutubeVideoUtil.isVideo(code)) {
+            this.code = YoutubeVideoUtil.retrieveVideoCodeFromUrL(code);
+        } else {
+            throw new IllegalArgumentException("Invalid video code: " + code);
+        }
         this.thumbnailUrl = "https://i.ytimg.com/vi/" + code + "/hqdefault.jpg";
     }
 
@@ -80,6 +86,17 @@ public class YoutubeVideo {
             System.err.println("Can't get thumbnail " + this.thumbnailUrl + " for video code " + this.code);
             return new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
         }
+    }
+
+    public void applyInfo(InfoYoutubeVideoFile info) {
+        this.code = info.getId();
+        this.thumbnailUrl = info.getThumbnail();
+        if (this.thumbnailUrl.contains("vi_webp")) {
+            this.thumbnailUrl = this.thumbnailUrl.replace("vi_webp", "vi");
+            this.thumbnailUrl = this.thumbnailUrl.replace(".webp", ".jpg");
+        }
+        this.title = info.getTitle();
+        this.author = info.getChannel();
     }
 
     public String getCode() {

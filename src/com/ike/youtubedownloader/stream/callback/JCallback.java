@@ -1,6 +1,6 @@
 package com.ike.youtubedownloader.stream.callback;
 
-import com.ike.youtubedownloader.swing.Frame;
+import com.ike.youtubedownloader.swingold.Frame;
 import com.ike.youtubedownloader.video.YoutubeVideo;
 
 import javax.swing.*;
@@ -71,9 +71,10 @@ public class JCallback extends JPanel implements DownloadCallback {
      * Paint a rectangle of green by the percentage of the download
      */
     @Override
-    public void callback(String percent, String speed, String eta) {
+    public void downloadCallback(String percent, String speed, String eta) {
         if (this.isDone)
             return;
+        System.out.printf("\r[download] %s, ETA %s", percent, eta);
         if (percent.contains("100%")) {
             this.setBackground(DONE);
             this.repaint();
@@ -82,5 +83,11 @@ public class JCallback extends JPanel implements DownloadCallback {
         this.process.setText(this.video.getAuthor() + "-" + this.video.getTitle() + "[" + percent + "]");
         this.percent = Float.parseFloat(percent.substring(1, percent.indexOf("%")));
         this.repaint();
+    }
+
+    @Override
+    public void messageCallback(String message) {
+        //Nothing
+        System.out.println(message);
     }
 }

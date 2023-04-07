@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class VideoFile {
 
     public static void saveOnFile(File file, ArrayList<YoutubeVideo> videos) {
-        saveOnFile(file, (YoutubeVideo[]) videos.toArray(new YoutubeVideo[0]));
+        saveOnFile(file, videos.toArray(new YoutubeVideo[0]));
     }
 
     public static void saveOnFile(File file, YoutubeVideo... videos) {

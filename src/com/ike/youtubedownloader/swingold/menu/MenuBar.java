@@ -1,6 +1,6 @@
-package com.ike.youtubedownloader.swing.menu;
+package com.ike.youtubedownloader.swingold.menu;
 
-import com.ike.youtubedownloader.swing.Frame;
+import com.ike.youtubedownloader.swingold.Frame;
 import com.ike.youtubedownloader.util.Settings;
 import com.ike.youtubedownloader.video.VideoFile;
 import com.ike.youtubedownloader.video.YoutubeVideo;

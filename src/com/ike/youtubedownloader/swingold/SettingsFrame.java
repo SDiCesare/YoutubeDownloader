@@ -1,4 +1,4 @@
-package com.ike.youtubedownloader.swing;
+package com.ike.youtubedownloader.swingold;
 
 import com.ike.youtubedownloader.util.Settings;
 
@@ -30,9 +30,9 @@ public class SettingsFrame extends JFrame {
         this.generalSettings.setBounds(bounds);
         this.generalSettings.setBorder(BorderFactory.createLineBorder(Color.RED));
         this.generalSettings.setLayout(null);
-        DescriptionTextField dll = new DescriptionTextField("DLL Path: ");
+        DescriptionTextField dll = new DescriptionTextField("Youtube-Dl Path: ");
         dll.setBounds(0, 20, 530, 40);
-        dll.setFieldValue(Settings.get(Settings.DLL_DIR));
+        dll.setFieldValue(Settings.get(Settings.YOUTUBE_DL_PATH));
         this.generalSettings.add(dll);
         //Download Settings
         this.downloadSettings = new JPanel();
@@ -69,7 +69,7 @@ public class SettingsFrame extends JFrame {
         JButton applyChanges = new JButton("Apply Changes");
         applyChanges.setBounds(25, 340, 150, 40);
         applyChanges.addActionListener((e) -> {
-            Settings.change(Settings.DLL_DIR, dll.getFieldValue());
+            Settings.change(Settings.YOUTUBE_DL_PATH, dll.getFieldValue());
             Settings.change(Settings.DOWNLOAD_DIR, outPath.getFieldValue());
             Settings.change(Settings.RESULTS, results.getFieldValue());
             Settings.change(Settings.DIRECT_DOWNLOAD, String.valueOf(directDownload.isSelected()));
