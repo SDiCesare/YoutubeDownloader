@@ -1,2 +1,5 @@
 
 out/
+*.mp3
+musica/
+*.ini

@@ -15,7 +15,7 @@ public class DownloadSyncPipe implements Runnable {
 
     private final OutputStream outputStream;
     private final InputStream inputStream;
-    private DownloadCallback callback;
+    private final DownloadCallback callback;
 
     public DownloadSyncPipe(InputStream inputStream, OutputStream outputStream, DownloadCallback callback) {
         this.inputStream = inputStream;
@@ -33,6 +33,8 @@ public class DownloadSyncPipe implements Runnable {
                     String text = new String(buffer);
                     if (text.contains("[download]")) {
                         this.callback(text);
+                    } else {
+                        this.callback.messageCallback(text);
                     }
                 }
             }
@@ -50,14 +52,23 @@ public class DownloadSyncPipe implements Runnable {
         int i = text.indexOf("%");
         if (i == -1)
             return;
-        String percent = text.substring(text.indexOf("]") + 1, i + 1);
+        String percent = text.substring(text.indexOf("]") + 1, i);
+        percent = percent.trim();
         i = text.indexOf("at");
         int etaIndex = text.indexOf("ETA");
         if (i == -1 || etaIndex == -1 || (i + 3) > etaIndex)
             return;
         String speed = text.substring(i + 3, etaIndex);
         String eta = text.substring(etaIndex + 4, etaIndex + 9);
-        this.callback.downloadCallback(percent, speed, eta);
+        if (text.contains("Destination")) {
+            this.callback.messageCallback("Applying Tag");
+            return;
+        }
+        try {
+            this.callback.downloadCallback((int) Double.parseDouble(percent), speed, eta);
+        } catch (NumberFormatException ex) {
+            this.callback.messageCallback(text);
+        }
     }
 
 }

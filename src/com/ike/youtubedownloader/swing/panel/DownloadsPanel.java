@@ -1,5 +1,6 @@
 package com.ike.youtubedownloader.swing.panel;
 
+import com.ike.youtubedownloader.stream.callback.DownloadCallback;
 import com.ike.youtubedownloader.swing.Frame;
 import com.ike.youtubedownloader.video.YoutubeVideo;
 
@@ -26,9 +27,10 @@ public class DownloadsPanel extends JPanel {
         this.add(this.filterPanel, BorderLayout.NORTH);
     }
 
-    public void addSong(YoutubeVideo video) {
-        this.songsPanel.addSong(video);
+    public DownloadCallback addSong(YoutubeVideo video) {
+        DownloadCallback downloadCallback = this.songsPanel.addSong(video);
         this.repaint();
+        return downloadCallback;
     }
 
 
@@ -45,7 +47,7 @@ public class DownloadsPanel extends JPanel {
             this.panels = new LinkedList<>();
         }
 
-        private void addSong(YoutubeVideo video) {
+        private DownloadCallback addSong(YoutubeVideo video) {
             SongPanel songPanel = new SongPanel(video, WIDTH, HEIGHT);
             songPanel.setLocation(0, this.panels.size() * HEIGHT);
             this.panels.add(songPanel);
@@ -55,6 +57,7 @@ public class DownloadsPanel extends JPanel {
             this.setSize(size);
             this.setMaximumSize(size);
             this.setMinimumSize(size);
+            return songPanel;
         }
 
     }

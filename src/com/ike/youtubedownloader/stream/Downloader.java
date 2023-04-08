@@ -60,17 +60,17 @@ public class Downloader {
     private void downloadProcess() {
         this.running = true;
         while (!queue.isEmpty()) {
-            System.out.println("In Queue: " + queue.size());
             YoutubeVideo video = queue.remove(0);
             DownloadCallback callback = callbacks.remove(0);
             try {
-                System.out.println("Downloading: " + video.getTitle() + "-" + video.getAuthor());
+                callback.messageCallback("Downloading: " + video.getTitle() + "-" + video.getAuthor());
                 downloadVideo(getCMD(), video, callback);
                 applyTag(video);
+                callback.messageEnd(null);
             } catch (IOException | InterruptedException | BaseException ex) {
                 ex.printStackTrace();
+                callback.messageEnd(ex);
             }
-            callback.downloadCallback(" 100%", "NaN", "NaN");
         }
         this.running = false;
     }

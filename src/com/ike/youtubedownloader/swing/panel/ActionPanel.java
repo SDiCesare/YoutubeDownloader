@@ -21,6 +21,8 @@ public class ActionPanel extends JPanel {
             if (downloadAction == null)
                 return;
             String url = JOptionPane.showInputDialog(null, "Insert video/playlist url");
+            if (url == null || url.equals(""))
+                return;
             if (YoutubeVideoUtil.isPlaylist(url)) {
                 YoutubeVideo[] youtubeVideos = YoutubeVideoUtil.retrieveVideosFromPlaylistUrl(url);
                 if (youtubeVideos == null)

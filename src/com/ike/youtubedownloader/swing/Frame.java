@@ -1,13 +1,14 @@
 package com.ike.youtubedownloader.swing;
 
 import com.ike.youtubedownloader.stream.Downloader;
+import com.ike.youtubedownloader.stream.callback.DownloadCallback;
+import com.ike.youtubedownloader.swing.dialog.VideoTagDialog;
 import com.ike.youtubedownloader.swing.panel.ActionPanel;
 import com.ike.youtubedownloader.swing.panel.DownloadsPanel;
+import com.ike.youtubedownloader.video.YoutubeVideo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -40,7 +41,10 @@ public class Frame extends JFrame {
         this.actionPanel.setBounds(0, 0, WIDTH, 60);
         this.actionPanel.setBackground(Color.RED);
         this.actionPanel.setDownloadAction((video) -> {
-            this.downloadsPanel.addSong(video);
+            VideoTagDialog videoTagDialog = new VideoTagDialog(this, video);
+            YoutubeVideo taggedVideo = videoTagDialog.showDialog();
+            DownloadCallback callback = this.downloadsPanel.addSong(taggedVideo);
+            this.downloader.download(taggedVideo, callback);
         });
         this.downloadsPanel = new DownloadsPanel();
         this.downloadsPanel.setBounds(10, 60, WIDTH - 20, HEIGHT - 70);

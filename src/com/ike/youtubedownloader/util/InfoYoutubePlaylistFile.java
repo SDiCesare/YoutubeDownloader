@@ -26,6 +26,14 @@ public class InfoYoutubePlaylistFile {
         this.title = title;
     }
 
+    public void setEntry(int entry) {
+        this.entry = entry;
+    }
+
+    public int getEntry() {
+        return entry;
+    }
+
     @Override
     public String toString() {
         return "InfoYoutubeFile{" +

@@ -15,8 +15,9 @@ public interface DownloadCallback {
      * @param eta     The time left for the download to finish (hh:mm:ss)
      * @param speed   The download speed (xx b/s)
      */
-    void downloadCallback(String percent, String speed, String eta);
+    void downloadCallback(int percent, String speed, String eta);
 
     void messageCallback(String msg);
 
+    void messageEnd(Throwable t);
 }

@@ -1,5 +1,6 @@
 package com.ike.youtubedownloader.swing.panel;
 
+import com.ike.youtubedownloader.stream.callback.DownloadCallback;
 import com.ike.youtubedownloader.swing.Frame;
 import com.ike.youtubedownloader.video.YoutubeVideo;
 
@@ -8,7 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class SongPanel extends JPanel {
+public class SongPanel extends JPanel implements DownloadCallback {
 
 
     private static final Color BORDER_COLOR = new Color(170, 170, 170);
@@ -36,8 +37,8 @@ public class SongPanel extends JPanel {
         this.nameLabel = new JLabel(text.length() > 70 ? text.substring(0, 67) + "..." : text);
         this.nameLabel.setBounds(120, 10, width - 100, height - 20);
         this.nameLabel.setFont(this.nameLabel.getFont().deriveFont(20.0f));
-        this.downloadProgress = new JLabel("100%");
-        this.downloadProgress.setBounds(width - 60, 10, 50, height - 20);
+        this.downloadProgress = new JLabel("0%");
+        this.downloadProgress.setBounds(width - 70, 10, 60, height - 20);
         this.downloadProgress.setFont(this.downloadProgress.getFont().deriveFont(20.0f));
         this.add(this.nameLabel);
         this.add(this.downloadProgress);
@@ -48,5 +49,26 @@ public class SongPanel extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
         g.drawImage(this.image, 10, 10, 100, this.getHeight() - 20, null);
+    }
+
+    @Override
+    public void downloadCallback(int percent, String speed, String eta) {
+        this.downloadProgress.setText(percent + "%");
+        this.repaint();
+    }
+
+    @Override
+    public void messageCallback(String msg) {
+
+    }
+
+    @Override
+    public void messageEnd(Throwable t) {
+        if (t == null) {
+            this.downloadProgress.setText("100%");
+        } else {
+            this.downloadProgress.setText("ERROR");
+        }
+        this.repaint();
     }
 }

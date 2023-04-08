@@ -9,12 +9,21 @@ package com.ike.youtubedownloader.stream.callback;
  **/
 public class SimpleDownloaderCallback implements DownloadCallback {
     @Override
-    public void downloadCallback(String percent, String speed, String eta) {
-        System.out.printf("\r[download] %s, ETA %s", percent, eta);
+    public void downloadCallback(int percent, String speed, String eta) {
+        System.out.println("[download] " + percent + "%, ETA " + eta);
     }
 
     @Override
     public void messageCallback(String msg) {
         System.out.println(msg);
     }
+
+    @Override
+    public void messageEnd(Throwable t) {
+        if (t == null)
+            return;
+        t.printStackTrace();
+    }
+
+
 }

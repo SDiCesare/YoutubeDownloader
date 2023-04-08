@@ -71,17 +71,17 @@ public class JCallback extends JPanel implements DownloadCallback {
      * Paint a rectangle of green by the percentage of the download
      */
     @Override
-    public void downloadCallback(String percent, String speed, String eta) {
+    public void downloadCallback(int percent, String speed, String eta) {
         if (this.isDone)
             return;
         System.out.printf("\r[download] %s, ETA %s", percent, eta);
-        if (percent.contains("100%")) {
+        if (percent == 100) {
             this.setBackground(DONE);
             this.repaint();
             this.isDone = true;
         }
         this.process.setText(this.video.getAuthor() + "-" + this.video.getTitle() + "[" + percent + "]");
-        this.percent = Float.parseFloat(percent.substring(1, percent.indexOf("%")));
+        this.percent = percent;
         this.repaint();
     }
 
@@ -89,5 +89,10 @@ public class JCallback extends JPanel implements DownloadCallback {
     public void messageCallback(String message) {
         //Nothing
         System.out.println(message);
+    }
+
+    @Override
+    public void messageEnd(Throwable t) {
+
     }
 }

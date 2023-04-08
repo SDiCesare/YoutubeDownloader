@@ -7,50 +7,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10e0ab0e-1860-4406-8305-58ab6ab16ebd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/YoutubeDownloader_jar2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/Test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/gson-2.10.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/callback/DownloadAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/panel/ActionPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/panel/DownloadsPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/panel/FilterPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/panel/SongPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/panel/VideoPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/EXPFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/Frame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/panels/SearchPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/util/InfoYoutubePlaylistFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/util/InfoYoutubeVideoFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/util/ResourceLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/util/SongFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/util/YoutubeVideoUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/dialog/VideoTagDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YoutubeDownloader.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YoutubeDownloader.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/downloaderSettings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/downloaderSettings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/DownloadSyncPipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/DownloadSyncPipe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/Downloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/Downloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/Searcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/Searcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/SyncPipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/DownloadSyncPipe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/callback/DownloadCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/callback/DownloadCallback.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/callback/JCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/callback/JCallback.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/callback/SimpleDownloaderCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/callback/SimpleDownloaderCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/DescriptionTextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/DescriptionTextField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/DownloadsFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/DownloadsFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/Frame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/HintTextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/HintTextField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/JVideoOptionMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/JVideoOptionMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/SearchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/SearchPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/SettingsFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/SettingsFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/VideoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/VideoPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/menu/MenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/menu/MenuBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/util/IniFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/util/IniFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/util/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/util/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/video/VideoFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/video/VideoFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/video/YoutubeVideo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/video/YoutubeVideo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/panel/ActionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/panel/ActionPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/panel/DownloadsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/panel/DownloadsPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/panel/SongPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/panel/SongPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/util/InfoYoutubePlaylistFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/util/InfoYoutubePlaylistFile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,17 +177,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "jdk.selected.JAVA_MODULE": "1.8.0_231",
-    "last_opened_file_path": "D:/Programmazione/Java/YoutubeDownloader/YoutubeDownloader/lib",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8.0_231&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Programmazione/Java/YoutubeDownloader/YoutubeDownloader/lib&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Programmazione\Java\YoutubeDownloader\YoutubeDownloader\lib" />
