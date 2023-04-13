@@ -7,7 +7,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10e0ab0e-1860-4406-8305-58ab6ab16ebd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/downloaderSettings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/downloaderSettings.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/dialog/VideoUrlDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/stream/callback/JCallback.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/panel/ActionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swing/panel/ActionPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/DescriptionTextField.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/DownloadsFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/EXPFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/Frame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/HintTextField.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/JVideoOptionMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/SearchPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/SettingsFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/VideoPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/menu/MenuBar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ike/youtubedownloader/swingold/panels/SearchPanel.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

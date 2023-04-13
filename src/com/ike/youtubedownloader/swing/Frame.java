@@ -37,7 +37,7 @@ public class Frame extends JFrame {
     }
 
     private void initLayout() {
-        this.actionPanel = new ActionPanel();
+        this.actionPanel = new ActionPanel(this);
         this.actionPanel.setBounds(0, 0, WIDTH, 60);
         this.actionPanel.setBackground(Color.RED);
         this.actionPanel.setDownloadAction((video) -> {
